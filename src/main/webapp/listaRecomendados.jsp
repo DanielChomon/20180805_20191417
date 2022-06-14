@@ -74,10 +74,8 @@
                             <td><button type="button" class="btn btn-success">Más de la Banda</button></td>
                         <%}else{%>
                            <%if(tipo==2 || tipo==3){%>
-                                <td><a type="button" href="<%=request.getContextPath()%>
-                                /listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>"
-                                       class="btn btn-outline-success btn-floating"
-                                       data-mdb-ripple-color="dark" style="color:#28a745"><i class="fas fa-star">♥</i>
+
+
                                 </a></td>
                             <%}%>
                         <%}%>
