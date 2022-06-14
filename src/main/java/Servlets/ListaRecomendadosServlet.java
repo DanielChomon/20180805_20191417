@@ -31,6 +31,11 @@ public class ListaRecomendadosServlet extends HttpServlet {
                 request.setAttribute("lista", cancionesDao.filtrarPorBandas(idbanda));
                 request.setAttribute("tipo",3);
                 break;
+            case "anadFav":
+                String id= request.getParameter("idC");
+                //cancionesDao.anadirLista(id, "Favoritos");
+                request.setAttribute("tipo",3);
+                break;
         }
         RequestDispatcher view =request.getRequestDispatcher("listaRecomendados.jsp");
         view.forward(request,response);

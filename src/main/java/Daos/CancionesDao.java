@@ -37,7 +37,7 @@ public class CancionesDao {
         ArrayList<BCancion> listaRecom=new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql="select c.idcancion, c.nombre_cancion, c.banda from cancion c";
+            String sql="select c.idcancion, c.nombre_cancion, c.banda, c.fav from cancion c";
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 Statement statement= conn.createStatement();
                 ResultSet rs= statement.executeQuery(sql)){
@@ -46,6 +46,7 @@ public class CancionesDao {
                     bCancion.setIdCancion(rs.getInt(1));
                     bCancion.setNombreCancion(rs.getString(2));
                     bCancion.setNombreBanda(rs.getString(3));
+                    bCancion.setFav(rs.getBoolean(4));
                     listaRecom.add(bCancion);
                 }
             }
@@ -58,7 +59,7 @@ public class CancionesDao {
         ArrayList<BCancion> lista= new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql="select c.idcancion, c.nombre_cancion, c.banda from cancion c where c.banda like ?";
+            String sql="select c.idcancion, c.nombre_cancion, c.banda, c.fav from cancion c where c.banda like ?";
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 PreparedStatement statement= conn.prepareStatement(sql)){
                 statement.setString(1, "%"+filtro+"%");
@@ -68,6 +69,7 @@ public class CancionesDao {
                         bCancion.setIdCancion(rs.getInt(1));
                         bCancion.setNombreCancion(rs.getString(2));
                         bCancion.setNombreBanda(rs.getString(3));
+                        bCancion.setFav(rs.getBoolean(4));
                         lista.add(bCancion);
                     }
                 }
@@ -78,4 +80,22 @@ public class CancionesDao {
         return lista;
     }
 
+    /*public void anadirLista(String idCancion, String nombreLista){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+
+        if(existe_lista(nombreLista)){
+
+        }else{
+
+        }
+
+    }
+    public boolean existe_lista(String nombreLista){
+
+        return ;
+    }*/
 }

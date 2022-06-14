@@ -4,16 +4,15 @@ public class BCancion {
     private int IdCancion;
     private String nombreCancion;
     private String nombreBanda;
-    /*private String fav;
+    private boolean fav;
 
-    public String getFav() {
+    public boolean getFav() {
         return fav;
     }
 
-    public void setFav(String fav) {
+    public void setFav(boolean fav) {
         this.fav = fav;
     }
-*/
     public int getIdCancion() {
         return IdCancion;
     }
