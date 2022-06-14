@@ -80,22 +80,147 @@ public class CancionesDao {
         return lista;
     }
 
-    /*public void anadirLista(String idCancion, String nombreLista){
+    public void anadirListaFav(String idCancion)    {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
             throw new RuntimeException(e);
         }
-
-        if(existe_lista(nombreLista)){
-
+        String nombreLista="Favoritos";
+        if(!existe_lista(nombreLista)){
+            if(crear_ListaReproduccion(nombreLista)){
+                anadirCancionLista(Integer.parseInt(idCancion),nombreLista);
+            }
         }else{
-
+            if(!existe_cancion(nombreLista,Integer.parseInt(idCancion))){
+                anadirCancionLista(Integer.parseInt(idCancion),nombreLista);
+            }else{
+                eliminarCancionLista(Integer.parseInt(idCancion),nombreLista);
+            }
         }
+    }
 
+    public void actualizarCancionFav(int idCancion, boolean favorito){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        String sql="update cancion set fav=? where idcancion=?";
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setBoolean(1,favorito);
+            pstmt.setInt(2, idCancion);
+            pstmt.executeUpdate();
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+        }
+    }
+    public boolean anadirCancionLista(int idCancion,String nombreLista){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        boolean exitoso;
+        String sql="insert into listareproduccion_has_cancion (listareproduccion_idlistareproduccion, cancion_idcancion) " +
+                "values (?, ?);";
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            if(nombreLista.equals("Favoritos")){
+                actualizarCancionFav(idCancion, true);
+            }
+            pstmt.setString(1,nombreLista);
+            pstmt.setInt(2,idCancion);
+            pstmt.executeUpdate();
+            exitoso=true;
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+            exitoso=false;
+        }
+        return exitoso;
+    }
+    public void eliminarCancionLista(int idCancion,String nombreLista){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        String sql="delete from listareproduccion_has_cancion where ListaReproduccion_idListaReproduccion=? and cancion_idcancion=?";
+
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            if(nombreLista.equals("Favoritos")){
+                actualizarCancionFav(idCancion, false);
+            }
+            pstmt.setString(1,nombreLista);
+            pstmt.setInt(2,idCancion);
+            pstmt.executeUpdate();
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+        }
+    }
+
+    public boolean crear_ListaReproduccion(String nombreLista){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        boolean exitoso;
+        String sql="insert into listareproduccion (idListaReproduccion) values (?)";
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setString(1,nombreLista);
+            pstmt.executeUpdate();
+            exitoso=true;
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+            exitoso=false;
+        }
+        return exitoso;
     }
     public boolean existe_lista(String nombreLista){
-
-        return ;
-    }*/
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        Boolean existe=false;
+        String sql="select * from listareproduccion where idListaReproduccion=?";
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setString(1,nombreLista);
+            try(ResultSet rs= pstmt.executeQuery()){
+                if(rs.next()){
+                    existe= true;
+                }
+            }
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+        }
+        return existe;
+    }
+    public boolean existe_cancion(String nombreLista,int idCancion){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
+        Boolean existe=false;
+        String sql="select * from listareproduccion_has_cancion where ListaReproduccion_idListaReproduccion= ? and cancion_idcancion=?";
+        try(Connection conn= DriverManager.getConnection(url,user,pass);
+            PreparedStatement pstmt= conn.prepareStatement(sql)){
+            pstmt.setString(1,nombreLista);
+            pstmt.setInt(2,idCancion);
+            try(ResultSet rs= pstmt.executeQuery()){
+                if(rs.next()){
+                    existe= true;
+                }
+            }
+        }catch(SQLException s){
+            System.out.println("Error de conexión");
+        }
+        return existe;
+    }
 }

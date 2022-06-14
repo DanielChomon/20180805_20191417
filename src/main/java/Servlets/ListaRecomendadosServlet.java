@@ -12,29 +12,41 @@ public class ListaRecomendadosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "recomendados" : request.getParameter("a");
-        String idbanda= request.getParameter("idbanda")==null ? "nada" : request.getParameter("idbanda");
-        if(!idbanda.equals("nada")){
+        String idbanda= request.getParameter("idbanda")==null ? "" : request.getParameter("idbanda");
+        if(!idbanda.equals("")){
             action="filtrarCanciones";
         }
         CancionesDao cancionesDao= new CancionesDao();
-        System.out.println(action);
         switch (action){
             case "recomendados":
                 request.setAttribute("lista", cancionesDao.listarRecomendados());
                 request.setAttribute("tipo", 1);
+                request.setAttribute("idFiltro", "");
                 break;
             case "listaCanciones":
                 request.setAttribute("lista", cancionesDao.listarCanciones());
                 request.setAttribute("tipo",2);
+                request.setAttribute("idFiltro", "");
                 break;
             case "filtrarCanciones":
                 request.setAttribute("lista", cancionesDao.filtrarPorBandas(idbanda));
                 request.setAttribute("tipo",3);
+                request.setAttribute("idFiltro", idbanda);
                 break;
             case "anadFav":
                 String id= request.getParameter("idC");
-                //cancionesDao.anadirLista(id, "Favoritos");
-                request.setAttribute("tipo",3);
+                cancionesDao.anadirListaFav(id);
+                int tipo= Integer.parseInt(request.getParameter("tipo"));
+                request.setAttribute("tipo",tipo);
+                idbanda=request.getParameter("idFiltro");
+                if(tipo==3){
+                    request.setAttribute("lista", cancionesDao.filtrarPorBandas(idbanda));
+                }else{
+                    if(tipo==2){
+                        request.setAttribute("lista", cancionesDao.listarCanciones());
+                    }
+                }
+                request.setAttribute("idFiltro", idbanda);
                 break;
         }
         RequestDispatcher view =request.getRequestDispatcher("listaRecomendados.jsp");
