@@ -14,10 +14,10 @@
             <div class="d-flex my-3">
                 <a class="h2" href="<%=request.getContextPath()%>/ListaRecomendadosServlet" style="text-decoration: none;">Lista de Cancion</a>
                 <a href="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=crear" class="btn btn-success ms-auto">Crear
-                    Trabajo</a>
+                    Cancion</a>
             </div>
             <hr/>
-            <form method="post" action="<%=request.getContextPath()%>/JobServlet?a=buscar">
+            <form method="post" action="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=buscar">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Buscar cancion"
                            aria-label="Buscar cancion" aria-describedby="button-addon2"
@@ -48,9 +48,9 @@
                         </td>
                         <td><%=cancion.getNombreBanda() %>
                         </td>
-                        <td><a href="<%=request.getContextPath()%>/JobServlet?a=editar&id=<%=cancion.getIdCancion() %>"
+                        <td><a href="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=editar&id=<%=cancion.getIdCancion() %>"
                                class="btn btn-primary">Editar</a></td>
-                        <td><a href="<%=request.getContextPath()%>/JobServlet?a=borrar&id=<%=cancion.getIdCancion() %>"
+                        <td><a href="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=borrar&id=<%=cancion.getIdCancion() %>"
                                class="btn btn-danger">Borrar</a></td>
                     </tr>
                     <% i++;
