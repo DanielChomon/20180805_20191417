@@ -1,15 +1,15 @@
 package Beans;
 
 public class BCancion {
-    private String IdCancion;
+    private int IdCancion;
     private String nombreCancion;
     private String nombreBanda;
 
-    public String getIdCancion() {
+    public int getIdCancion() {
         return IdCancion;
     }
 
-    public void setIdCancion(String idCancion) {
+    public void setIdCancion(int idCancion) {
         IdCancion = idCancion;
     }
 
