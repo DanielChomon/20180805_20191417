@@ -24,6 +24,7 @@
                         <th>CANCION</th>
                         <th>BANDA</th>
                         <th>VER</th>
+                        <th>AGREGAR A FAVORITOS</th>
                     </thead>
                     <%
                         for (BCancion bCancion : listaRecom) {
@@ -36,6 +37,9 @@
                         <td><%=bCancion.getNombreBanda()%>
                         </td>
                         <td><button type="button" class="btn btn-success">Más de la Banda</button></td>
+                        </td>
+                        <td><button type="button" class="btn btn-danger">Agregar a <3</button></td>
+                        </td>
                     </tr>
                     <%
                         }
