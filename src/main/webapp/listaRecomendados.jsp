@@ -1,4 +1,3 @@
-<%@ page import="Beans.Tour" %>
 <%@ page import="Beans.BCancion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<Beans.BCancion>" scope="request" id="listaRecom"/>
@@ -10,7 +9,7 @@
     <body>
         <div class='container'>
             <jsp:include page="/includes/navbar.jsp">
-                <jsp:param name="page" value="tours"/>
+                <jsp:param name="page" value="recomendados"/>
             </jsp:include>
             <div class="pb-5 pt-4 px-3 titlecolor">
                 <div class="col-lg-6">
