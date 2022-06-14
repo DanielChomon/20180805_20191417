@@ -38,7 +38,7 @@
                         </td>
                         <td><button type="button" class="btn btn-success">Más de la Banda</button></td>
                         </td>
-                        <td><button type="button" class="btn btn-danger">Agregar a <3</button></td>
+                        <td><button type="button" class="btn btn-danger">Agregar Cancion</button></td>
                         </td>
                     </tr>
                     <%
