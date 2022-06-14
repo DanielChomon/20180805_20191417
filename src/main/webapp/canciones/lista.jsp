@@ -1,6 +1,6 @@
-
+<%@ page import="Beans.BCancion" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaCanciones" scope="request" type="java.util.ArrayList<Beans.Cancion>"/>
+<jsp:useBean id="listaCanciones" scope="request" type="java.util.ArrayList<Beans.BCancion>"/>
 <jsp:useBean id="textoBuscar" scope="request" type="java.lang.String" class="java.lang.String" />
 <html>
     <head>
@@ -13,8 +13,10 @@
         <div class="container">
             <div class="d-flex my-3">
                 <a class="h2" href="<%=request.getContextPath()%>/ListaRecomendadosServlet" style="text-decoration: none;">Lista de Cancion</a>
-                <a href="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=crear" class="btn btn-success ms-auto">Crear
-                    Cancion</a>
+
+                <a class="btn btn-warning" href="<%=request.getContextPath()%>
+                /ListaRecomendadosServlet?a=crear">Mostrar todas las canciones</a>
+
             </div>
             <hr/>
             <form method="post" action="<%=request.getContextPath()%>/ListaRecomendadosServlet?a=buscar">
@@ -38,7 +40,7 @@
                 </thead>
                 <tbody>
                     <% int i = 1;
-                        for (Cancion cancion : listaCanciones) { %>
+                        for (BCancion cancion : listaCanciones) { %>
                     <tr>
                         <td><%=i %>
                         </td>
