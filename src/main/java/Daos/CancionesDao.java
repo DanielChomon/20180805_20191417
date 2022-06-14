@@ -1,6 +1,7 @@
 package Daos;
 
 import Beans.BCancion;
+import Beans.BLista;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class CancionesDao {
         ArrayList<BCancion> listaRecom=new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql="select c.idcancion, c.nombre_cancion, c.banda,        count(r.idreproduccion) as `cantidad_R` from cancion c inner join reproduccion r on (r.cancion_idcancion=c.idcancion) group by c.idcancion having `cantidad_R`>2 order by `cantidad_R` DESC";
+            String sql="select c.idcancion, c.nombre_cancion, c.banda, count(r.idreproduccion) as `cantidad_R` from cancion c inner join reproduccion r on (r.cancion_idcancion=c.idcancion) group by c.idcancion having `cantidad_R`>2 order by `cantidad_R` DESC";
             System.out.println(sql);
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 Statement statement= conn.createStatement();
@@ -55,6 +56,28 @@ public class CancionesDao {
         }
         return listaRecom;
     }
+
+    public ArrayList<BLista> listarListas(){
+        ArrayList<BLista> listaLista=new ArrayList<>();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String sql="select l.idListaReproduccion from listarepreoduccion l";
+            try(Connection conn= DriverManager.getConnection(url,user,pass);
+                Statement statement= conn.createStatement();
+                ResultSet rs= statement.executeQuery(sql)){
+                while(rs.next()){
+                    BLista bLista= new BLista();
+                    bLista.setIdNombre(rs.getString(1));
+                    listaLista.add(bLista);
+                }
+            }
+        }catch (ClassNotFoundException | SQLException e){
+            throw new RuntimeException(e);
+        }
+        return listaLista;
+    }
+
+
     public ArrayList<BCancion> filtrarPorBandas(String filtro){
         ArrayList<BCancion> lista= new ArrayList<>();
         try{
