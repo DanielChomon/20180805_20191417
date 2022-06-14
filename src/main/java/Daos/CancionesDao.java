@@ -53,9 +53,9 @@ public class CancionesDao {
             throw new RuntimeException(e);
         }
         return listaRecom;
-    }
+    } AGREGAR A FAVORITOS
 
-    public void actualizar(BCancion cancion) {
+    /* public void actualizar(BCancion cancion) {
 
         private String user = "root";
         private String pass = "root";
@@ -80,5 +80,5 @@ public class CancionesDao {
         }
 
     }
-
 }
+*/
