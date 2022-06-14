@@ -7,12 +7,24 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ListaRecomendadosServlet", value = "/ListaRecomendados")
+@WebServlet(name = "ListaRecomendadosServlet", value = {"/ListaRecomendados", "/listaCanciones", ""})
 public class ListaRecomendadosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("a") == null ? "recomendados" : request.getParameter("a");
+
         CancionesDao cancionesDao= new CancionesDao();
-        request.setAttribute("listaRecom", cancionesDao.listarRecomendados());
+        System.out.println(action);
+        switch (action){
+            case "recomendados":
+                request.setAttribute("lista", cancionesDao.listarRecomendados());
+                request.setAttribute("tipo", 1);
+                break;
+            case "listaCanciones":
+                request.setAttribute("lista", cancionesDao.listarCanciones());
+                request.setAttribute("tipo",2);
+                break;
+        }
         RequestDispatcher view =request.getRequestDispatcher("listaRecomendados.jsp");
         view.forward(request,response);
     }

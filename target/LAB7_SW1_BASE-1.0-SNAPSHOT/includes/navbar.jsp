@@ -22,12 +22,14 @@
                 <a class="nav-link <%=request.getParameter("page").equals("tpc")? "active": "" %>" href="<%=request.getContextPath()%>/listaToursporCiudad">Ciudades y Fechas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>" href="<%=request.getContextPath()%>/listaCanciones">Canciones</a>
+                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>" href="<%=request.getContextPath()%>/listaCanciones?a=listaCanciones">Canciones</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <%=request.getParameter("page").equals("artistas")? "active": "" %>" href="<%=request.getContextPath()%>/listaArtistas">Artistas</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link <%=request.getParameter("page").equals("recomendados")? "active": "" %>" href="<%=request.getContextPath()%>/ListaRecomendados?a=recomendados">Recomendados</a>
+            </li>
         </ul>
     </div>
 </nav>
