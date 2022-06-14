@@ -4,6 +4,15 @@ public class BCancion {
     private int IdCancion;
     private String nombreCancion;
     private String nombreBanda;
+    private String fav;
+
+    public String getFav() {
+        return fav;
+    }
+
+    public void setFav(String fav) {
+        this.fav = fav;
+    }
 
     public int getIdCancion() {
         return IdCancion;
