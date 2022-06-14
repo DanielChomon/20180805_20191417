@@ -32,12 +32,12 @@ public class CancionesDao {
         }
         return listaRecom;
     }
+
     public ArrayList<BCancion> listarCanciones(){
         ArrayList<BCancion> listaRecom=new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             String sql="select c.idcancion, c.nombre_cancion, c.banda from cancion c";
-            System.out.println(sql);
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 Statement statement= conn.createStatement();
                 ResultSet rs= statement.executeQuery(sql)){
@@ -53,6 +53,29 @@ public class CancionesDao {
             throw new RuntimeException(e);
         }
         return listaRecom;
+    }
+    public ArrayList<BCancion> filtrarPorBandas(String filtro){
+        ArrayList<BCancion> lista= new ArrayList<>();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String sql="select c.idcancion, c.nombre_cancion, c.banda from cancion c where c.banda like ?";
+            try(Connection conn= DriverManager.getConnection(url,user,pass);
+                PreparedStatement statement= conn.prepareStatement(sql)){
+                statement.setString(1, "%"+filtro+"%");
+                try(ResultSet rs=statement.executeQuery()){
+                    while(rs.next()){
+                        BCancion bCancion= new BCancion();
+                        bCancion.setIdCancion(rs.getInt(1));
+                        bCancion.setNombreCancion(rs.getString(2));
+                        bCancion.setNombreBanda(rs.getString(3));
+                        lista.add(bCancion);
+                    }
+                }
+            }
+        }catch (ClassNotFoundException | SQLException e){
+            throw new RuntimeException(e);
+        }
+        return lista;
     }
 
 }

@@ -8,7 +8,7 @@
             <jsp:param name="title" value="Lista de Canciones Recomendadas"/>
         </jsp:include>
     <%}else{%>
-        <%if(tipo==2){%>
+        <%if(tipo==2 || tipo==3){%>
             <jsp:include page="/static/head.jsp">
                 <jsp:param name="title" value="Lista de Canciones por Banda"/>
             </jsp:include>
@@ -21,17 +21,31 @@
                 <jsp:param name="page" value="recomendados"/>
             </jsp:include>
             <%}else{%>
-                <%if(tipo==2){%>
+                <%if(tipo==2 || tipo==3){%>
                     <jsp:include page="/includes/navbar.jsp">
                         <jsp:param name="page" value="canciones"/>
                     </jsp:include>
                 <%}%>
             <%}%>
             <div class="pb-5 pt-4 px-3 titlecolor">
-                <div class="col-lg-6">
-                    <h1 class='text-light'>Lista de Canciones Recomendadas</h1>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <%if(tipo==1){%>
+                            <h1 class='text-light'>Lista de Canciones Recomendadas</h1>
+                        <%}else{%>
+                            <%if(tipo==2 || tipo==3){%>
+                                <h1 class='text-light'>Lista de Canciones por Banda</h1>
+                            <%}%>
+                        <%}%>
+                    </div>
+                    <%if(tipo==3){%>
+                    <div class="col-lg-4 offset-lg-4">
+                            <a class="btn btn-warning" href="<%=request.getContextPath()%>/listaCanciones?a=listaCanciones">Mostrar todas las canciones</a>
+                    </div>
+                    <%}%>
                 </div>
             </div>
+
             <div class="tabla">
                 <table class="table table-dark table-transparent table-hover">
                     <thead>
