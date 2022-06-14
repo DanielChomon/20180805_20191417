@@ -39,6 +39,8 @@
                         </td>
                         <td><button type="button" class="btn btn-danger">Agregar Cancion</button></td>
                         </td>
+                        <td><button type="button" class="btn btn-light"> + </button></td>
+                        </td>
                     </tr>
                     <%
                         }
