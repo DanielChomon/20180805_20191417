@@ -58,11 +58,9 @@
                         <th>BANDA</th>
                         <%if(tipo==1){%>
                             <th>VER</th>
-                        <%}else{%>
-                            <%if(tipo==2 || tipo==3){%>
-                                <th></th>
-                            <%}%>
                         <%}%>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <%
                         for (BCancion bCancion : lista) {
@@ -75,40 +73,22 @@
                         <td><%=bCancion.getNombreBanda()%>
                         </td>
                         <%if(tipo==1){%>
-                            <td><button type="button" class="btn btn-success">Más de la Banda</button></td>
-                            <%if(bCancion.getFav()){%>
-                                <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/ListaRecomendados?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Quitar favoritos" class="btn btn-outline-danger btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
-                                    <i class="fas fa-star">💔</i>
-                                </a></td>
-                                <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/ListaRecomendados?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
-                                    <i class="fas fa-star"><b>+</b></i>
-                                </a></td>
-                            <%}else{%>
-                                <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/ListaRecomendados?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a favoritos" class="btn btn-outline-success btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
-                                    <i class="fas fa-star">❤</i>
-                                </a></td>
-                                <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/ListaRecomendados?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
-                                    <i class="fas fa-star"><b>+</b></i>
-                                </a></td>
+                            <td><a type="button" href="<%=request.getContextPath()%>/ListaRecomendados?idbanda=<%=bCancion.getNombreBanda()%>" class="btn btn-success">Más de la Banda</a></td>
                         <%}%>
+                        <%if(bCancion.getFav()){%>
+                            <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Quitar favoritos" class="btn btn-outline-danger btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
+                                <i class="fas fa-star">💔</i>
+                            </a></td>
+                            <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
+                                <i class="fas fa-star"><b>+</b></i>
+                            </a></td>
                         <%}else{%>
-                           <%if(tipo==2 || tipo==3){%>
-                                <%if(bCancion.getFav()){%>
-                                    <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Quitar favoritos" class="btn btn-outline-danger btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
-                                        <i class="fas fa-star">💔</i>
-                                    </a></td>
-                                    <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
-                                        <i class="fas fa-star"><b>+</b></i>
-                                    </a></td>
-                                <%}else{%>
-                                    <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a favoritos" class="btn btn-outline-success btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
-                                        <i class="fas fa-star">❤</i>
-                                    </a></td>
-                                    <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
-                                        <i class="fas fa-star"><b>+</b></i>
-                                    </a></td>
-                                <%}%>
-                            <%}%>
+                            <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a favoritos" class="btn btn-outline-success btn-floating" data-mdb-ripple-color="dark" style="color:#28a745">
+                                <i class="fas fa-star">❤</i>
+                            </a></td>
+                            <td class="text-center"><a type="button" href="<%=request.getContextPath()%>/listaCanciones?a=anadFav&idC=<%=bCancion.getIdCancion()%>&tipo=<%=tipo%>&idFiltro=<%=idFiltro%>" title = " Agregar a lista" class="btn btn-outline-secondary btn-floating" data-toggle="modal" data-target="#exampleModalCenter" data-mdb-ripple-color="dark" style="color:#28a745">
+                                <i class="fas fa-star"><b>+</b></i>
+                            </a></td>
                         <%}%>
                     </tr>
                     <%

@@ -15,7 +15,7 @@ public class CancionesDao {
         ArrayList<BCancion> listaRecom=new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql="select c.idcancion, c.nombre_cancion, c.banda, count(r.idreproduccion) as `cantidad_R` from cancion c inner join reproduccion r on (r.cancion_idcancion=c.idcancion) group by c.idcancion having `cantidad_R`>2 order by `cantidad_R` DESC";
+            String sql="select c.idcancion, c.nombre_cancion, c.banda, c.fav, count(r.idreproduccion) as `cantidad_R` from cancion c inner join reproduccion r on (r.cancion_idcancion=c.idcancion) group by c.idcancion having `cantidad_R`>2 order by `cantidad_R` DESC";
             System.out.println(sql);
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 Statement statement= conn.createStatement();
@@ -25,6 +25,7 @@ public class CancionesDao {
                     bCancion.setIdCancion(rs.getInt(1));
                     bCancion.setNombreCancion(rs.getString(2));
                     bCancion.setNombreBanda(rs.getString(3));
+                    bCancion.setFav(rs.getBoolean(4));
                     listaRecom.add(bCancion);
                 }
             }

@@ -24,11 +24,6 @@ public class ListaRecomendadosServlet extends HttpServlet {
                 request.setAttribute("tipo", 1);
                 request.setAttribute("idFiltro", "");
                 break;
-            /*case "listaListas":
-                request.setAttribute("lista2", cancionesDao.listarListas());
-                request.setAttribute("tipo",1);
-                request.setAttribute("idFiltro", "");
-                break;*/
             case "listaCanciones":
                 request.setAttribute("lista", cancionesDao.listarCanciones());
                 request.setAttribute("lista2", cancionesDao.listarListas());
@@ -52,6 +47,8 @@ public class ListaRecomendadosServlet extends HttpServlet {
                 }else{
                     if(tipo==2){
                         request.setAttribute("lista", cancionesDao.listarCanciones());
+                    }else{
+                        request.setAttribute("lista", cancionesDao.listarRecomendados());
                     }
                 }
                 request.setAttribute("idFiltro", idbanda);
