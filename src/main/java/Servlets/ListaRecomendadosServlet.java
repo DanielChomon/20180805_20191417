@@ -23,8 +23,15 @@ public class ListaRecomendadosServlet extends HttpServlet {
                 request.setAttribute("tipo", 1);
                 request.setAttribute("idFiltro", "");
                 break;
+
+            case "listaListas":
+                request.setAttribute("lista2", cancionesDao.listarListas());
+                request.setAttribute("tipo",1);
+                request.setAttribute("idFiltro", "");
+                break;
+
             case "listaCanciones":
-                request.setAttribute("lista", cancionesDao.listarCanciones());
+                request.setAttribute("lista2", cancionesDao.listarCanciones());
                 request.setAttribute("tipo",2);
                 request.setAttribute("idFiltro", "");
                 break;

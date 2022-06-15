@@ -77,7 +77,6 @@ public class CancionesDao {
         return listaLista;
     }
 
-
     public ArrayList<BCancion> filtrarPorBandas(String filtro){
         ArrayList<BCancion> lista= new ArrayList<>();
         try{
@@ -203,6 +202,7 @@ public class CancionesDao {
         }
         return exitoso;
     }
+
     public boolean existe_lista(String nombreLista){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
