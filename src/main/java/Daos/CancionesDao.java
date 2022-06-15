@@ -61,7 +61,7 @@ public class CancionesDao {
         ArrayList<BLista> listaLista=new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String sql="select l.idListaReproduccion from listarepreoduccion l";
+            String sql="select * from listareproduccion l";
             try(Connection conn= DriverManager.getConnection(url,user,pass);
                 Statement statement= conn.createStatement();
                 ResultSet rs= statement.executeQuery(sql)){

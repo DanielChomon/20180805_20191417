@@ -20,23 +20,24 @@ public class ListaRecomendadosServlet extends HttpServlet {
         switch (action){
             case "recomendados":
                 request.setAttribute("lista", cancionesDao.listarRecomendados());
+                request.setAttribute("lista2", cancionesDao.listarListas());
                 request.setAttribute("tipo", 1);
                 request.setAttribute("idFiltro", "");
                 break;
-
-            case "listaListas":
+            /*case "listaListas":
                 request.setAttribute("lista2", cancionesDao.listarListas());
                 request.setAttribute("tipo",1);
                 request.setAttribute("idFiltro", "");
-                break;
-
+                break;*/
             case "listaCanciones":
-                request.setAttribute("lista2", cancionesDao.listarCanciones());
+                request.setAttribute("lista", cancionesDao.listarCanciones());
+                request.setAttribute("lista2", cancionesDao.listarListas());
                 request.setAttribute("tipo",2);
                 request.setAttribute("idFiltro", "");
                 break;
             case "filtrarCanciones":
                 request.setAttribute("lista", cancionesDao.filtrarPorBandas(idbanda));
+                request.setAttribute("lista2", cancionesDao.listarListas());
                 request.setAttribute("tipo",3);
                 request.setAttribute("idFiltro", idbanda);
                 break;
@@ -54,6 +55,7 @@ public class ListaRecomendadosServlet extends HttpServlet {
                     }
                 }
                 request.setAttribute("idFiltro", idbanda);
+                request.setAttribute("lista2", cancionesDao.listarListas());
                 break;
         }
         RequestDispatcher view =request.getRequestDispatcher("listaRecomendados.jsp");
